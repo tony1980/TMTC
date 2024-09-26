@@ -1,3 +1,6 @@
+# 定义常量，表示序列重复的周期
+const PRBS_PERIOD = 255
+
 # 定义伪随机序列生成器
 # seed: 初始种子值，用于生成序列
 # n: 需要生成的序列长度
@@ -8,7 +11,7 @@ function prbs_generator(seed::UInt8, n::Int)
     # 循环生成序列，直到达到所需的长度
     while length(prbs) < n
         register = seed
-        for _ in 1:255  # 每255位重复一次
+        for _ in 1:PRBS_PERIOD  # 每PRBS_PERIOD位重复一次
             push!(prbs, register)
             output = register & 1
             register = register >>> 1
